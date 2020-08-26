@@ -2,12 +2,13 @@ ARG DEBIAN_VERSION=stretch-slim
 
 ##### Building stage #####
 FROM debian:${DEBIAN_VERSION} as builder
-MAINTAINER Tareq Alqutami <tareqaziz2010@gmail.com>
+LABEL version = "1.0"
+LABEL maintainer = "JamiePhonic@gmail.com"
 
 # Versions of nginx, rtmp-module and ffmpeg 
-ARG  NGINX_VERSION=1.18
+ARG  NGINX_VERSION=1.18.0
 ARG  NGINX_RTMP_MODULE_VERSION=1.2.1
-ARG  FFMPEG_VERSION=4.2.1
+ARG  FFMPEG_VERSION=4.3.1
 
 # Install dependencies
 RUN apt-get update && \
@@ -111,7 +112,13 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 # Copy  html players to container
 COPY players /usr/local/nginx/html/players
 
+# Copy Stunnel config file to container
+COPY conf/stunnel.conf /etc/stunnel/stunnel.conf
+
+# Copy run script to container
+COPY run.sh /run.sh
+
 EXPOSE 1935
 EXPOSE 8080
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["bash", "run.sh"]
