@@ -5,7 +5,7 @@ FROM debian:${DEBIAN_VERSION} as builder
 MAINTAINER Tareq Alqutami <tareqaziz2010@gmail.com>
 
 # Versions of nginx, rtmp-module and ffmpeg 
-ARG  NGINX_VERSION=1.17.5
+ARG  NGINX_VERSION=1.18
 ARG  NGINX_RTMP_MODULE_VERSION=1.2.1
 ARG  FFMPEG_VERSION=4.2.1
 
@@ -80,7 +80,8 @@ RUN cd /tmp/build/ffmpeg-${FFMPEG_VERSION} && \
 	
 # Copy stats.xsl file to nginx html directory and cleaning build files
 RUN cp /tmp/build/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}/stat.xsl /usr/local/nginx/html/stat.xsl && \
-	rm -rf /tmp/build
+	rm -rf /tmp/build && \
+	mkdir /var/run/stunnel4
 
 ##### Building the final image #####
 FROM debian:${DEBIAN_VERSION}
@@ -90,7 +91,7 @@ RUN apt-get update && \
 	apt-get install -y \
 		ca-certificates openssl libpcre3-dev \
 		librtmp1 libtheora0 libvorbis-dev libmp3lame0 \
-		libvpx4 libx264-dev libx265-dev && \
+		libvpx4 libx264-dev libx265-dev stunnel4 htop && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy files from build stage to final stage	

@@ -5,7 +5,7 @@ FROM alpine:${ALPINE_VERSION} as builder
 MAINTAINER Tareq Alqutami <tareqaziz2010@gmail.com>
 
 # Versions of nginx, rtmp-module and ffmpeg 
-ARG  NGINX_VERSION=1.17.5
+ARG  NGINX_VERSION=1.18
 ARG  NGINX_RTMP_MODULE_VERSION=1.2.1
 ARG  FFMPEG_VERSION=4.2.1
 
@@ -82,7 +82,8 @@ RUN cd /tmp/build/ffmpeg-${FFMPEG_VERSION} && \
 	
 # Copy stats.xsl file to nginx html directory and clean build files
 RUN cp /tmp/build/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}/stat.xsl /usr/local/nginx/html/stat.xsl && \
-	rm -rf /tmp/build
+	rm -rf /tmp/build && \
+	mkdir /var/run/stunnel4
 
 ##### Building the final image #####
 FROM alpine:${ALPINE_VERSION}
@@ -91,8 +92,8 @@ FROM alpine:${ALPINE_VERSION}
 RUN apk update	&& \
 	apk --no-cache add \
 		bash ca-certificates openssl \
-		pcre libtheora libvorbis libvpx \
-		librtmp x264-dev x265-dev freetype lame && \
+		pcre libtheora libvorbis lame libvpx \
+		librtmp x264-dev x265-dev freetype stunnel4 htop && \
     rm -rf /var/lib/apt/lists/*	
 
 # Copy files from build stage to final stage		
