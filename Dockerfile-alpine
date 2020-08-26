@@ -94,7 +94,7 @@ RUN apk update	&& \
 	apk --no-cache add \
 		bash ca-certificates openssl \
 		pcre libtheora libvorbis lame libvpx \
-		librtmp x264-dev x265-dev freetype stunnel4 htop && \
+		librtmp x264-dev x265-dev freetype stunnel htop && \
     rm -rf /var/lib/apt/lists/*	
 
 # Copy files from build stage to final stage		
