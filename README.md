@@ -1,19 +1,20 @@
 # RTMP-HLS Docker
 
-**Docker image for video streaming server that supports RTMP, HLS, and DASH streams.**
+**Docker image for video streaming server that supports RTMP, RTMPS (via Stunnel), HLS, and DASH streams.**
 
 ## Description
 
-This Docker image can be used to create a video streaming server that supports [**RTMP**](https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol), [**HLS**](https://en.wikipedia.org/wiki/HTTP_Live_Streaming), [**DASH**](https://en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP) out of the box. 
+This Docker image can be used to create a video streaming server that supports [**RTMP**](https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol), [**RTMPS**](https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol) (via Stunnel), [**HLS**](https://en.wikipedia.org/wiki/HTTP_Live_Streaming), [**DASH**](https://en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP) out of the box. 
 It also allows adaptive streaming and custom transcoding of video streams.
 All modules are built from source on Debian and Alpine Linux base images.
 
 ## Features
  * The backend is [**Nginx**](http://nginx.org/en/) with [**nginx-rtmp-module**](https://github.com/arut/nginx-rtmp-module).
- * [**FFmpeg**](https://www.ffmpeg.org/) for transcoding and adaptive streaming.
+ * [**FFmpeg**](https://www.ffmpeg.org/) for transcoding and adaptive streaming
+ * Stunnel for RTMPS support (primarily for Facebook Live)
  * Default settings: 
 	* RTMP is ON
-	* HLS is ON (adaptive, 5 variants)
+	* HLS is ON
 	* DASH is ON 
 	* Other Nginx configuration files are also provided to allow for RTMP-only streams or FFmpeg transcoding. 
  * Statistic page of RTMP streams at `http://<server ip>:<server port>/stats`.
@@ -38,11 +39,23 @@ For Alpine-based Image use:
 docker run -d -p 1935:1935 -p 8080:8080 jamiephonic/rtmp-server:latest-alpine
 ```
 
-To run with custom conf file:
+To run with a custom Nginx configuration file:
 ```
 docker run -d -p 1935:1935 -p 8080:8080 -v custom.conf:/etc/nginx/nginx.conf jamiephonic/rtmp-server
 ```
-where `custom.conf` is the new conf file for Nginx.
+where `custom.conf` is the new config file for Nginx.
+
+To forward (push) the incomming stream to facebook live, add the following line below `push rtmp://localhost:1935/show;` in your `custom.conf` file:
+```
+push rtmp://127.0.0.1:1936/rtmp/<stream_key>;
+```
+Where `<stream_key>` is your Facebook Live stream key.
+
+To run with a custom Stunnel configuration file:
+```
+docker run -d -p 1935:1935 -p 8080:8080 -v custom-stunnel.conf:/etc/stunnel/stunnel.conf jamiephonic/rtmp-server
+```
+where `custom-stunnel.conf` is the new config file for Stunnel.
 
 ### To stream to the server
  * **Stream live RTMP content to:**
@@ -69,7 +82,7 @@ Go to Settings > Stream, choose the following settings:
 	 * Click Play.
 
 * **Using provided web players:** <br/>
-The provided demo players assume the stream-key is called `test` and the player is opened in localhost. 
+The provided demo players assume the stream-key is called `test` and the player is opened from localhost. 
 	* To play RTMP content (requires Flash): `http://localhost:8080/players/rtmp.html` 
 	* To play HLS content: `http://localhost:8080/players/hls_basic.html`
 	* To play HLS content using hls.js library: `http://localhost:8080/players/hls.html`
@@ -82,7 +95,7 @@ The provided demo players assume the stream-key is called `test` and the player 
 		```
 		docker run -d -p 1935:1935 -p 8080:8080 -v custom_players:/usr/local/nginx/html/players jamiephonic/rtmp-server
 		```
-		where `custom_players` is the directory holding the modified html files.
+		where `custom_players` is the directory holding the modified player html files.
 
 ## Copyright
 Released under MIT license.
