@@ -2,7 +2,7 @@ ARG ALPINE_VERSION=3.11
 
 ##### Building stage #####
 FROM alpine:${ALPINE_VERSION} as builder
-LABEL version = "1.1"
+LABEL version = "1.2"
 LABEL maintainer = "JamiePhonic@gmail.com"
 
 # Versions of nginx, rtmp-module and ffmpeg 
@@ -89,13 +89,14 @@ RUN cp /tmp/build/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}/stat.xsl /usr/l
 ##### Building the final image #####
 FROM alpine:${ALPINE_VERSION}
 
-# Install dependencies and create the assets folder for default players to be copied to
+# Install dependencies and create the assets folder for default players and configs to be copied to
 RUN apk update	&& \
 	apk --no-cache add \
 		bash ca-certificates openssl \
 		pcre libtheora libvorbis lame libvpx \
 		librtmp x264-dev x265-dev freetype stunnel htop && \
     rm -rf /var/lib/apt/lists/*	&& \
+	mkdir /assets-default && \
 	mkdir /assets
 
 # Copy files from build stage to final stage		
@@ -110,19 +111,16 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
 
 # Copy  nginx config file to container
-COPY conf/nginx.conf /etc/nginx/nginx.conf
-
-# Copy Stunnel config file to container
-COPY conf/stunnel.conf /etc/stunnel/stunnel.conf
+COPY conf /assets-default/configs
 
 # Copy  html players to container
-COPY players /assets/players
+COPY players /assets-default/players
 
 # Copy run script to container
 COPY run.sh /run.sh
 
 EXPOSE 1935
 EXPOSE 8080
-VOLUME /usr/local/nginx/html/players
+VOLUME /assets
 
 CMD ["bash", "/run.sh"]
