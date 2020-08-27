@@ -2,7 +2,7 @@ ARG DEBIAN_VERSION=stretch-slim
 
 ##### Building stage #####
 FROM debian:${DEBIAN_VERSION} as builder
-LABEL version = "1.0"
+LABEL version = "1.1"
 LABEL maintainer = "JamiePhonic@gmail.com"
 
 # Versions of nginx, rtmp-module and ffmpeg 
@@ -87,13 +87,14 @@ RUN cp /tmp/build/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}/stat.xsl /usr/l
 ##### Building the final image #####
 FROM debian:${DEBIAN_VERSION}
 
-# Install dependencies
+# Install dependencies and create the assets folder for default players to be copied to
 RUN apt-get update && \
 	apt-get install -y \
 		ca-certificates openssl libpcre3-dev \
 		librtmp1 libtheora0 libvorbis-dev libmp3lame0 \
 		libvpx4 libx264-dev libx265-dev stunnel4 htop && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+	mkdir /assets
 
 # Copy files from build stage to final stage	
 COPY --from=builder /usr/local /usr/local
@@ -109,16 +110,17 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
 # Copy  nginx config file to container
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-# Copy  html players to container
-COPY players /usr/local/nginx/html/players
-
 # Copy Stunnel config file to container
 COPY conf/stunnel.conf /etc/stunnel/stunnel.conf
+
+# Copy  html players to container
+COPY players /assets/players
 
 # Copy run script to container
 COPY run.sh /run.sh
 
 EXPOSE 1935
 EXPOSE 8080
+VOLUME /usr/local/nginx/html/players
 
-CMD ["bash", "run.sh"]
+CMD ["bash", "/run.sh"]
