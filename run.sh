@@ -8,7 +8,7 @@ cp -Rnv /assets-default/* /assets/
 
 echo "Creating symlinks to Configs and Players from /assets"
 # Link players from assets directory
-ln -sf /assets/players /usr/local/nginx/html/players
+ln -sf /assets/players /usr/local/nginx/html/
 # Link Nginx config from assets directory
 ln -sf /assets/configs/nginx.conf /etc/nginx/nginx.conf
 # Link Stunnel config from assets directory
