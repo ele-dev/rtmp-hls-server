@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>RTMP-Server</Name>
+  <Repository>jamiephonic/rtmp-hls-stunnel</Repository>
+  <Registry>https://hub.docker.com/r/jamiephonic/rtmp-hls-stunnel</Registry>
+  <Network>br1</Network>
+  <MyIP>192.168.12.12</MyIP>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project>https://github.com/JamiePhonic/rtmp-hls-stunnel-server</Project>
+  <Overview>This Docker image can be used to create a video streaming server that supports RTMP, HLS, DASH out of the box. It also allows adaptive streaming and custom transcoding of video streams. All modules are built from source on Debian and Alpine Linux base images.&#xD;
+&#xD;
+Stream live RTMP content to:&#xD;
+rtmp://&amp;lt;server ip&amp;gt;:1935/live/&amp;lt;stream_key&amp;gt;&#xD;
+where &amp;lt;stream_key&amp;gt; is any stream key you specify.&#xD;
+&#xD;
+View in VLC:&#xD;
+rtmp://&amp;lt;server ip&amp;gt;:1935/live/&amp;lt;stream-key&amp;gt;&#xD;
+http://&amp;lt;server ip&amp;gt;:8080/hls/&amp;lt;stream-key&amp;gt;.m3u8 &#xD;
+http://&amp;lt;server ip&amp;gt;:8080/dash/&amp;lt;stream-key&amp;gt;_src.mpd&#xD;
+&#xD;
+View in Browser (assumes &amp;lt;stream-key&amp;gt; is 'test', edit the html files from the mounted directory to change this):&#xD;
+http://&amp;lt;server ip&amp;gt;:8080/players/hls.html&#xD;
+http://&amp;lt;server ip&amp;gt;:8080/players/dash.html&#xD;
+http://&amp;lt;server ip&amp;gt;:8080/players/rtmp.html</Overview>
+  <Category>GameServers: Network:Other</Category>
+  <WebUI>http://[IP]:8080/stats</WebUI>
+  <TemplateURL/>
+  <Icon>https://intinor.com/wp-content/uploads/2017/01/RTMP.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1599826442</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>This Docker image can be used to create a video streaming server that supports RTMP, HLS, DASH out of the box. It also allows adaptive streaming and custom transcoding of video streams. All modules are built from source on Debian and Alpine Linux base images.&#xD;
+&#xD;
+Stream live RTMP content to:&#xD;
+rtmp://&amp;lt;server ip&amp;gt;:1935/live/&amp;lt;stream_key&amp;gt;&#xD;
+where &amp;lt;stream_key&amp;gt; is any stream key you specify.&#xD;
+&#xD;
+View in VLC:&#xD;
+rtmp://&amp;lt;server ip&amp;gt;:1935/live/&amp;lt;stream-key&amp;gt;&#xD;
+http://&amp;lt;server ip&amp;gt;:8080/hls/&amp;lt;stream-key&amp;gt;.m3u8 &#xD;
+http://&amp;lt;server ip&amp;gt;:8080/dash/&amp;lt;stream-key&amp;gt;_src.mpd&#xD;
+&#xD;
+View in Browser (assumes &amp;lt;stream-key&amp;gt; is 'test', edit the html files from the mounted directory to change this):&#xD;
+http://&amp;lt;server ip&amp;gt;:8080/players/hls.html&#xD;
+http://&amp;lt;server ip&amp;gt;:8080/players/dash.html&#xD;
+http://&amp;lt;server ip&amp;gt;:8080/players/rtmp.html</Description>
+  <Networking>
+    <Mode>br1</Mode>
+    <Publish/>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/rtmp-server</HostDir>
+      <ContainerDir>/assets</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment/>
+  <Labels/>
+  <Config Name="Players" Target="/assets" Default="/mnt/user/appdata/rtmp-server/players" Mode="rw" Description="Assets " Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/rtmp-server</Config>
+</Container>
