@@ -3,8 +3,7 @@
   <Name>RTMP-Server</Name>
   <Repository>jamiephonic/rtmp-hls-stunnel</Repository>
   <Registry>https://hub.docker.com/r/jamiephonic/rtmp-hls-stunnel</Registry>
-  <Network>br1</Network>
-  <MyIP>192.168.12.12</MyIP>
+  <Network>br0</Network>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <Support/>
