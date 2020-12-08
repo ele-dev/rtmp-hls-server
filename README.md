@@ -34,38 +34,16 @@ This image was inspired by similar docker images from [tiangolo](https://hub.doc
 ### To run the server
 
 ```
-docker run -d -p 1935:1935 -p 8080:8080 jamiephonic/rtmp-hls-stunnel
+docker run -d -p 1935:1935 -p 8080:8080 -v /your/local/assets/:/assets jamiephonic/rtmp-hls-stunnel:latest
 ```
 
 For Alpine-based Image use:
 
 ```
-docker run -d -p 1935:1935 -p 8080:8080 jamiephonic/rtmp-hls-stunnel:latest-alpine
+docker run -d -p 1935:1935 -p 8080:8080 -v /your/local/assets/:/assets jamiephonic/rtmp-hls-stunnel:latest-alpine
 ```
 
-To run with a custom Nginx configuration file:
-
-```
-docker run -d -p 1935:1935 -p 8080:8080 -v nginx-custom.conf:/etc/nginx/nginx.conf jamiephonic/rtmp-hls-stunnel
-```
-
-where `nginx-custom.conf` is the new config file for Nginx.
-
-To forward (push) the incomming stream to facebook live, add the following line under `application live {...};` section of your `nginx-custom.conf` file:
-
-```
-push rtmp://127.0.0.1:1936/rtmp/<stream_key>;
-```
-
-Where `<stream_key>` is your Facebook Live stream key.
-
-To run with a custom Stunnel configuration file:
-
-```
-docker run -d -p 1935:1935 -p 8080:8080 -v stunnel-custom.conf:/etc/stunnel/stunnel.conf jamiephonic/rtmp-hls-stunnel
-```
-
-where `stunnel-custom.conf` is the new config file for Stunnel.
+When you start the container, the default players and configuration files will be copied into `/your/local/assets/` to allow you to easily access and edit them.
 
 ### To stream to the server
 
@@ -106,13 +84,7 @@ where `stunnel-custom.conf` is the new config file for Stunnel.
   **Notes:**
 
   - These web players are hardcoded to play stream key "test" at localhost.
-  - To change the stream source for these players. Download the html files and modify the `src` attribute in the video tag in the html file. You can then mount the modified files to the container as follows:
-
-  ```
-  docker run -d -p 1935:1935 -p 8080:8080 -v custom_players:/usr/local/nginx/html/players jamiephonic/rtmp-hls-stunnel
-  ```
-
-  where `custom_players` is the directory holding the modified player html files.
+  - To change the stream source for these players, Modify the `src` attribute in the video tag in the html file and then reload the page.
 
 ## Copyright
 
