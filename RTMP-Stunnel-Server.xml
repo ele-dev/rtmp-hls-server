@@ -1,15 +1,17 @@
 <?xml version="1.0"?>
 <Container version="2">
-  <Name>RTMP-Server</Name>
+  <Name>RTMP-Stunnel-Server</Name>
   <Repository>jamiephonic/rtmp-hls-stunnel</Repository>
   <Registry>https://hub.docker.com/r/jamiephonic/rtmp-hls-stunnel</Registry>
-  <Network>host</Network>
+  <Network>bridge</Network>
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <Support/>
   <Project>https://github.com/JamiePhonic/rtmp-hls-stunnel-server</Project>
-  <Overview>This Docker image can be used to create a video streaming server that supports RTMP, HLS, DASH out of the box. It also allows adaptive streaming and custom transcoding of video streams. All modules are built from source on Debian and Alpine Linux base images.&#xD;
+  <Overview>This Docker image can be used to create a video streaming server that supports RTMP, HLS, DASH out of the box. It also allows adaptive streaming and custom transcoding of video streams. (Not enabled by default)&#xD;
+The default configurations have entries for forwarding the RTMP stream to Youtube and to Facebook Live (Via Stunnel).&#xD;
+All modules are built from source on Debian and Alpine Linux base images.&#xD;
 &#xD;
 Stream live RTMP content to:&#xD;
 rtmp://&amp;lt;server ip&amp;gt;:1935/live/&amp;lt;stream_key&amp;gt;&#xD;
@@ -24,17 +26,19 @@ View in Browser (assumes &amp;lt;stream-key&amp;gt; is 'test', edit the html fil
 http://&amp;lt;server ip&amp;gt;:8080/players/hls.html&#xD;
 http://&amp;lt;server ip&amp;gt;:8080/players/dash.html&#xD;
 http://&amp;lt;server ip&amp;gt;:8080/players/rtmp.html</Overview>
-  <Category>GameServers: Network:Other</Category>
+  <Category>Network:Other</Category>
   <WebUI>http://[IP]:8080/stats</WebUI>
   <TemplateURL/>
   <Icon>https://intinor.com/wp-content/uploads/2017/01/RTMP.png</Icon>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
-  <DateInstalled>1607707665</DateInstalled>
+  <DateInstalled>1607709641</DateInstalled>
   <DonateText/>
   <DonateLink/>
-  <Description>This Docker image can be used to create a video streaming server that supports RTMP, HLS, DASH out of the box. It also allows adaptive streaming and custom transcoding of video streams. All modules are built from source on Debian and Alpine Linux base images.&#xD;
+  <Description>This Docker image can be used to create a video streaming server that supports RTMP, HLS, DASH out of the box. It also allows adaptive streaming and custom transcoding of video streams. (Not enabled by default)&#xD;
+The default configurations have entries for forwarding the RTMP stream to Youtube and to Facebook Live (Via Stunnel).&#xD;
+All modules are built from source on Debian and Alpine Linux base images.&#xD;
 &#xD;
 Stream live RTMP content to:&#xD;
 rtmp://&amp;lt;server ip&amp;gt;:1935/live/&amp;lt;stream_key&amp;gt;&#xD;
@@ -50,8 +54,19 @@ http://&amp;lt;server ip&amp;gt;:8080/players/hls.html&#xD;
 http://&amp;lt;server ip&amp;gt;:8080/players/dash.html&#xD;
 http://&amp;lt;server ip&amp;gt;:8080/players/rtmp.html</Description>
   <Networking>
-    <Mode>host</Mode>
-    <Publish/>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>1935</HostPort>
+        <ContainerPort>1935</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>8080</HostPort>
+        <ContainerPort>8080</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
   </Networking>
   <Data>
     <Volume>
@@ -62,5 +77,7 @@ http://&amp;lt;server ip&amp;gt;:8080/players/rtmp.html</Description>
   </Data>
   <Environment/>
   <Labels/>
-  <Config Name="Players &amp;amp; Configs" Target="/assets" Default="/mnt/user/appdata/rtmp-server" Mode="rw" Description="Directory where the containers config files and player pages will be stored" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/rtmp-server</Config>
+  <Config Name="Configs &amp;amp; Players Directory" Target="/assets" Default="/mnt/user/appdata/rtmp-server" Mode="rw" Description="Directory where the containers config files and player pages will be stored." Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/rtmp-server</Config>
+  <Config Name="RTMP Port" Target="1935" Default="1935" Mode="tcp" Description="The port to accept an RTMP stream on." Type="Port" Display="always" Required="false" Mask="false">1935</Config>
+  <Config Name="Players &amp;amp; Stats Port" Target="8080" Default="8080" Mode="tcp" Description="The port used to access the built in players and stats page." Type="Port" Display="always" Required="false" Mask="false">8080</Config>
 </Container>
