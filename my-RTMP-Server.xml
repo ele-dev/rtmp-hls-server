@@ -3,7 +3,8 @@
   <Name>RTMP-Server</Name>
   <Repository>jamiephonic/rtmp-hls-stunnel</Repository>
   <Registry>https://hub.docker.com/r/jamiephonic/rtmp-hls-stunnel</Registry>
-  <Network>br0</Network>
+  <Network>host</Network>
+  <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <Support/>
@@ -30,7 +31,7 @@ http://&amp;lt;server ip&amp;gt;:8080/players/rtmp.html</Overview>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
-  <DateInstalled>1599826442</DateInstalled>
+  <DateInstalled>1607707665</DateInstalled>
   <DonateText/>
   <DonateLink/>
   <Description>This Docker image can be used to create a video streaming server that supports RTMP, HLS, DASH out of the box. It also allows adaptive streaming and custom transcoding of video streams. All modules are built from source on Debian and Alpine Linux base images.&#xD;
@@ -49,7 +50,7 @@ http://&amp;lt;server ip&amp;gt;:8080/players/hls.html&#xD;
 http://&amp;lt;server ip&amp;gt;:8080/players/dash.html&#xD;
 http://&amp;lt;server ip&amp;gt;:8080/players/rtmp.html</Description>
   <Networking>
-    <Mode>br1</Mode>
+    <Mode>host</Mode>
     <Publish/>
   </Networking>
   <Data>
@@ -61,5 +62,5 @@ http://&amp;lt;server ip&amp;gt;:8080/players/rtmp.html</Description>
   </Data>
   <Environment/>
   <Labels/>
-  <Config Name="Players" Target="/assets" Default="/mnt/user/appdata/rtmp-server/players" Mode="rw" Description="Assets " Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/rtmp-server</Config>
+  <Config Name="Players &amp;amp; Configs" Target="/assets" Default="/mnt/user/appdata/rtmp-server" Mode="rw" Description="Directory where the containers config files and player pages will be stored" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/rtmp-server</Config>
 </Container>
