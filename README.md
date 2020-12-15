@@ -34,7 +34,7 @@ This image was inspired by similar docker images from [tiangolo](https://hub.doc
 ### To run the server
 
 ```shell
-docker run -d -p 1935:1935 -p 1936:1936 -p 8080:8080 -e PUID=$UID -e PGID=0 -e SSL_DOMAIN='rtmp.domain.loc' -v /your/local/assets/:/assets jamiephonic/rtmp-hls-stunnel:latest
+docker run -d -p 1935:1935 -p 1936:1936 -p 8080:8080 -e PUID=$UID -e PGID=0 -e SSL_DOMAIN='rtmp.domain.loc' -v /your/local/assets/:/assets jamiephonic/rtmps-hls-server:latest
 ```
 
 When you start the container, the default players and configuration files will be copied into `/your/local/assets/` to allow you to easily access and edit them.
