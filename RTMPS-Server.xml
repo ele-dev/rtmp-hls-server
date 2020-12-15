@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>RTMP-Server</Name>
-  <Repository>jamiephonic/rtmp-hls-stunnel</Repository>
-  <Registry>https://hub.docker.com/r/jamiephonic/rtmp-hls-stunnel</Registry>
+  <Repository>jamiephonic/rtmps-hls-stunnel</Repository>
+  <Registry>https://hub.docker.com/r/jamiephonic/rtmps-hls-server</Registry>
   <Network>bridge</Network>
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <Support/>
-  <Project>https://github.com/JamiePhonic/rtmp-hls-stunnel-server</Project>
-  <Overview>This Docker image can be used to create a video streaming server that supports RTMP, HLS, DASH out of the box. It also allows adaptive streaming and custom transcoding of video streams. All modules are built from source on Debian and Alpine Linux base images.&#xD;
+  <Project>https://github.com/JamiePhonic/rtmps-hls-server</Project>
+  <Overview>This Docker image can be used to create a video streaming server that supports RTMP, RTMPS, HLS, DASH out of the box. It also allows adaptive streaming and custom transcoding of video streams. All modules are built from source on Debian and Alpine Linux base images.&#xD;
 &#xD;
 Stream live RTMP content to:&#xD;
 rtmp://&amp;lt;server ip&amp;gt;:1935/live/&amp;lt;stream_key&amp;gt;&#xD;
 or &#xD;
-rtmps://&amp;lt;server ip&amp;gt;:1936/live/&amp;lt;stream_key&amp;gt;&#xD;
+rtmps://&amp;lt;ssl_domain&amp;gt;:1936/live/&amp;lt;stream_key&amp;gt;&#xD;
 where &amp;lt;stream_key&amp;gt; is any stream key you specify.&#xD;
 &#xD;
 View in VLC:&#xD;
@@ -36,10 +36,12 @@ http://&amp;lt;server ip&amp;gt;:8080/players/rtmp.html</Overview>
   <DateInstalled>1607901721</DateInstalled>
   <DonateText/>
   <DonateLink/>
-  <Description>This Docker image can be used to create a video streaming server that supports RTMP, HLS, DASH out of the box. It also allows adaptive streaming and custom transcoding of video streams. All modules are built from source on Debian and Alpine Linux base images.&#xD;
+  <Description>This Docker image can be used to create a video streaming server that supports RTMP, RTMPS, HLS, DASH out of the box. It also allows adaptive streaming and custom transcoding of video streams. All modules are built from source on Debian and Alpine Linux base images.&#xD;
 &#xD;
 Stream live RTMP content to:&#xD;
 rtmp://&amp;lt;server ip&amp;gt;:1935/live/&amp;lt;stream_key&amp;gt;&#xD;
+or &#xD;
+rtmps://&amp;lt;ssl_domain&amp;gt;:1936/live/&amp;lt;stream_key&amp;gt;&#xD;
 where &amp;lt;stream_key&amp;gt; is any stream key you specify.&#xD;
 &#xD;
 View in VLC:&#xD;
