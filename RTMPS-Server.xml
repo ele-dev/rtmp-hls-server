@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Container version="2">
-  <Name>RTMP-Server</Name>
+  <Name>RTMPS-Server</Name>
   <Repository>jamiephonic/rtmps-hls-stunnel</Repository>
   <Registry>https://hub.docker.com/r/jamiephonic/rtmps-hls-server</Registry>
   <Network>bridge</Network>
@@ -12,10 +12,13 @@
   <Overview>This Docker image can be used to create a video streaming server that supports RTMP, RTMPS, HLS, DASH out of the box. It also allows adaptive streaming and custom transcoding of video streams. All modules are built from source on Debian and Alpine Linux base images.&#xD;
 &#xD;
 Stream live RTMP content to:&#xD;
-rtmp://&amp;lt;server ip&amp;gt;:1935/live/&amp;lt;stream_key&amp;gt;&#xD;
-or &#xD;
+rtmp://&amp;lt;server ip&amp;gt;:1935/live/&amp;lt;stream_key&amp;gt; &#xD;
+where &amp;lt;stream_key&amp;gt; is any stream key you specify.&#xD;
+&#xD;
+Stream live RTMPS content to:&#xD;
 rtmps://&amp;lt;ssl_domain&amp;gt;:1936/live/&amp;lt;stream_key&amp;gt;&#xD;
 where &amp;lt;stream_key&amp;gt; is any stream key you specify.&#xD;
+(Check the Github Wiki for information on setting up RTMPS support)&#xD;
 &#xD;
 View in VLC:&#xD;
 rtmp://&amp;lt;server ip&amp;gt;:1935/live/&amp;lt;stream-key&amp;gt;&#xD;
@@ -33,16 +36,19 @@ http://&amp;lt;server ip&amp;gt;:8080/players/rtmp.html</Overview>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
-  <DateInstalled>1607901721</DateInstalled>
+  <DateInstalled>1608057256</DateInstalled>
   <DonateText/>
   <DonateLink/>
   <Description>This Docker image can be used to create a video streaming server that supports RTMP, RTMPS, HLS, DASH out of the box. It also allows adaptive streaming and custom transcoding of video streams. All modules are built from source on Debian and Alpine Linux base images.&#xD;
 &#xD;
 Stream live RTMP content to:&#xD;
-rtmp://&amp;lt;server ip&amp;gt;:1935/live/&amp;lt;stream_key&amp;gt;&#xD;
-or &#xD;
+rtmp://&amp;lt;server ip&amp;gt;:1935/live/&amp;lt;stream_key&amp;gt; &#xD;
+where &amp;lt;stream_key&amp;gt; is any stream key you specify.&#xD;
+&#xD;
+Stream live RTMPS content to:&#xD;
 rtmps://&amp;lt;ssl_domain&amp;gt;:1936/live/&amp;lt;stream_key&amp;gt;&#xD;
 where &amp;lt;stream_key&amp;gt; is any stream key you specify.&#xD;
+(Check the Github Wiki for information on setting up RTMPS support)&#xD;
 &#xD;
 View in VLC:&#xD;
 rtmp://&amp;lt;server ip&amp;gt;:1935/live/&amp;lt;stream-key&amp;gt;&#xD;
