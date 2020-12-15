@@ -45,6 +45,8 @@ RUN cd /tmp/build/nginx-${NGINX_VERSION} && \
         --lock-path=/var/lock/nginx.lock \
         --http-client-body-temp-path=/tmp/nginx-client-body \
         --with-http_ssl_module \
+		--with-stream \
+		--with-stream_ssl_module \
         --with-threads \
         --add-module=/tmp/build/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION} && \
     make -j $(getconf _NPROCESSORS_ONLN) && \
@@ -94,7 +96,7 @@ RUN apt-get update && \
 		librtmp1 libtheora0 libvorbis-dev libmp3lame0 \
 		libvpx4 libx264-dev libx265-dev stunnel4 htop && \
     rm -rf /var/lib/apt/lists/* && \
-	mkdir /assets-default && \
+	mkdir /assets-default && mkdir /assets-default/ssl && \
 	mkdir /assets
 
 # Copy files from build stage to final stage	
@@ -117,7 +119,12 @@ COPY players /assets-default/players
 # Copy run script to container
 COPY run.sh /run.sh
 
+ENV IMAGE=Debian
+ENV PUID=0
+ENV PGID=0
+ENV SSL_DOMAIN=rtmp-server.loc
 EXPOSE 1935
+EXPOSE 1936
 EXPOSE 8080
 VOLUME /assets
 

@@ -1,10 +1,10 @@
-# RTMP-HLS-Stunnel Docker
+# RTMPS-HLS-Server Docker
 
-**Docker image for video streaming server that supports RTMP, RTMPS (via Stunnel), HLS, and DASH streams.**
+**Docker image for video streaming server that supports RTMP, RTMPS, HLS, and DASH streams.**
 
 ## Description
 
-This Docker image can be used to create a video streaming server that supports [**RTMP**](https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol) Ingest, **RTMP** & **RTMPS** (via Stunnel) Pushing, and **RTMP**, [**HLS**](https://en.wikipedia.org/wiki/HTTP_Live_Streaming) & [**DASH**](https://en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP) playback out of the box.
+This Docker image can be used to create a video streaming server that supports [**RTMP**](https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol) & **RTMPS**\* Ingest, **RTMP** & **RTMPS** (via Stunnel) Pushing, and **RTMP**, [**HLS**](https://en.wikipedia.org/wiki/HTTP_Live_Streaming) & [**DASH**](https://en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP) playback out of the box.
 It also allows adaptive streaming and custom transcoding of video streams.
 All modules are built from source on Debian and Alpine Linux base images.
 
@@ -33,25 +33,21 @@ This image was inspired by similar docker images from [tiangolo](https://hub.doc
 
 ### To run the server
 
-```
-docker run -d -p 1935:1935 -p 8080:8080 -v /your/local/assets/:/assets jamiephonic/rtmp-hls-stunnel:latest
-```
-
-For Alpine-based Image use:
-
-```
-docker run -d -p 1935:1935 -p 8080:8080 -v /your/local/assets/:/assets jamiephonic/rtmp-hls-stunnel:latest-alpine
+```shell
+docker run -d -p 1935:1935 -p 1936:1936 -p 8080:8080 -e PUID=$UID -e PGID=0 -e SSL_DOMAIN='rtmp.domain.loc' -v /your/local/assets/:/assets jamiephonic/rtmps-hls-server:latest
 ```
 
 When you start the container, the default players and configuration files will be copied into `/your/local/assets/` to allow you to easily access and edit them.
+
+For more examples, see the [Wiki](https://github.com/JamiePhonic/rtmps-hls-server/wiki/usage)
+
+***
 
 ### To stream to the server
 
 - **Stream live RTMP content to:**
 
-  ```
-  rtmp://<server ip>:1935/live/<stream_key>
-  ```
+ `rtmp://<server ip>:1935/live/<stream_key>`
 
   where `<stream_key>` is any stream key you specify.
 
@@ -60,6 +56,10 @@ When you start the container, the default players and configuration files will b
   - Service: Custom Streaming Server.
   - Server: `rtmp://<server ip>:1935/live`.
   - Stream key: anything you want, however provided video players assume stream key is `test`
+  
+See the [Wiki](https://github.com/JamiePhonic/rtmps-hls-server/wiki/streaming-to-the-server) for how to stream to the server with RTMPS
+
+***
 
 ### To view the stream
 
@@ -76,10 +76,10 @@ When you start the container, the default players and configuration files will b
 
 - **Using provided web players:** <br/>
   The provided demo players assume the stream-key is called `test` and the player is opened from localhost.
-  - To play RTMP content (requires Flash): `http://localhost:8080/players/rtmp.html`
-  - To play HLS content: `http://localhost:8080/players/hls_basic.html`
-  - To play HLS content using hls.js library: `http://localhost:8080/players/hls.html`
-  - To play DASH content: `http://localhost:8080/players/dash.html`
+  - To play RTMP content (requires Flash): `http://<server ip>:8080/players/rtmp.html`
+  - To play HLS content: `http://<server ip>:8080/players/hls_basic.html`
+  - To play HLS content using hls.js library: `http://<server ip>:8080/players/hls.html`
+  - To play DASH content: `http://<server ip>:8080/players/dash.html`
 
   **Notes:**
 
