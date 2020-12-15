@@ -39,7 +39,7 @@ docker run -d -p 1935:1935 -p 1936:1936 -p 8080:8080 -e PUID=$UID -e PGID=0 -e S
 
 When you start the container, the default players and configuration files will be copied into `/your/local/assets/` to allow you to easily access and edit them.
 
-For more examples, see the [Wiki](https://github.com/JamiePhonic/rtmp-hls-stunnel-server/wiki/usage)
+For more examples, see the [Wiki](https://github.com/JamiePhonic/rtmps-hls-server/wiki/usage)
 
 ***
 
@@ -57,7 +57,7 @@ For more examples, see the [Wiki](https://github.com/JamiePhonic/rtmp-hls-stunne
   - Server: `rtmp://<server ip>:1935/live`.
   - Stream key: anything you want, however provided video players assume stream key is `test`
   
-See the [Wiki](https://github.com/JamiePhonic/rtmp-hls-stunnel-server/wiki/streaming-to-the-server) for how to stream to the server with RTMPS
+See the [Wiki](https://github.com/JamiePhonic/rtmps-hls-server/wiki/streaming-to-the-server) for how to stream to the server with RTMPS
 
 ***
 
