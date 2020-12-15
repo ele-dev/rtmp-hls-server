@@ -38,6 +38,7 @@ docker run -d -p 1935:1935 -p 1936:1936 -p 8080:8080 -e PUID=$UID -e PGID=0 -e S
 ```
 
 When you start the container, the default players and configuration files will be copied into `/your/local/assets/` to allow you to easily access and edit them.
+This will only be done once when you first start the container. If you want to restore the default configs, delete `/your/local/assets/.initialized` amd restart the container.
 
 For more examples, see the [Wiki](https://github.com/JamiePhonic/rtmps-hls-server/wiki/usage)
 
