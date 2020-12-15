@@ -33,25 +33,21 @@ This image was inspired by similar docker images from [tiangolo](https://hub.doc
 
 ### To run the server
 
-```
-docker run -d -p 1935:1935 -p 8080:8080 -v /your/local/assets/:/assets jamiephonic/rtmp-hls-stunnel:latest
-```
-
-For Alpine-based Image use:
-
-```
-docker run -d -p 1935:1935 -p 8080:8080 -v /your/local/assets/:/assets jamiephonic/rtmp-hls-stunnel:latest-alpine
+```shell
+docker run -d -p 1935:1935 -p 1936:1936 -p 8080:8080 -e PUID=$UID -e PGID=0 -e SSL_DOMAIN='your.domain.tld' -v /your/local/assets/:/assets jamiephonic/rtmp-hls-stunnel:latest
 ```
 
 When you start the container, the default players and configuration files will be copied into `/your/local/assets/` to allow you to easily access and edit them.
+
+For more examples, see the [Wiki](https://github.com/JamiePhonic/rtmp-hls-stunnel-server/wiki/usage)
+
+***
 
 ### To stream to the server
 
 - **Stream live RTMP content to:**
 
-  ```
-  rtmp://<server ip>:1935/live/<stream_key>
-  ```
+ `rtmp://<server ip>:1935/live/<stream_key>`
 
   where `<stream_key>` is any stream key you specify.
 
@@ -60,6 +56,10 @@ When you start the container, the default players and configuration files will b
   - Service: Custom Streaming Server.
   - Server: `rtmp://<server ip>:1935/live`.
   - Stream key: anything you want, however provided video players assume stream key is `test`
+  
+See the [Wiki](https://github.com/JamiePhonic/rtmp-hls-stunnel-server/wiki/streaming-to-the-server) for how to stream to the server with RTMPS
+
+***
 
 ### To view the stream
 
