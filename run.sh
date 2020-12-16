@@ -43,7 +43,8 @@ if [ ! -f "/assets/ssl/.self_signed/RTMP-CA.crt" ]; then
     echo -e "`date +"%Y-%m-%d %H:%M:%S"` INFO: Generating a Self Signing Certificate Authority..."
     openssl genrsa -out /assets/ssl/.self_signed/RTMP-CA.key 2048
     openssl req -x509 -new -nodes -key /assets/ssl/.self_signed/RTMP-CA.key -sha256 -days 1825 -subj '/CN=RTMP-Server-CA' -out /assets/ssl/.self_signed/RTMP-CA.crt
-    cp -fv /assets/ssl/.self_signed/RTMP-CA.crt /assets/ssl/
+    cp -fv /assets/ssl/.self_signed/RTMP-CA.crt /assets/ssl/ &>/dev/null
+	echo -e ""
 fi
 
 # Generate a cert/key pair if they don't already exist, otherwise Nginx won't start properly.
