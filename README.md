@@ -95,4 +95,4 @@ Released under MIT license.
 
 - **GitHub repo**: <https://github.com/JamiePhonic/rtmp-hls-server.git>
 
-- **Docker Hub image**: <https://hub.docker.com/r/jamiephonic/rtmp-hls-stunnel>
+- **Docker Hub image**: <https://hub.docker.com/r/jamiephonic/rtmps-hls-server>
