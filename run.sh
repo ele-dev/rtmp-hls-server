@@ -12,16 +12,21 @@ function generate_certificate () {
 
 # Copy assets from /assets-default to /assets
 # If /assets has been mounted from the host, this will automatically populate the host directory with the files
-# Copy default players and configs
+# Copy default players and configs if '/assets/.initialized' does not exist
 
 if [ ! -f "/assets/.initialized" ]; then
 	echo -e "`date +"%Y-%m-%d %H:%M:%S"` INFO: Copying default Assets to /assets/"
+    # Copy default assets from /assets-default/ to /assets/
+    # Hard link the hls player as index.html (making it the default player)
     if [ "$IMAGE" = "Alpine" ]; then
         cp -Rfv /assets-default/* /assets/ 2>/dev/null
+        ln -f /assets/players/hls.html /assets/players/index.html
     else
         cp -Rfv /assets-default/* /assets/ 2>/dev/null
+        ln -f /assets/players/hls.html /assets/players/index.html
     fi
-	touch /assets/.initialized
+    # Create an empty file called '.initialized' so we dont re-copy the assets again
+	echo "Delete me and restart the container to restore default configs and players." >/assets/.initialized
 fi
 
 echo -e "`date +"%Y-%m-%d %H:%M:%S"` INFO: Creating symlinks to Configs and Players from /assets/ \\n"
