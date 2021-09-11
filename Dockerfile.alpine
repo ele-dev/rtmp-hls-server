@@ -1,14 +1,14 @@
-ARG ALPINE_VERSION=3.12
+ARG ALPINE_VERSION=3.13
 
 ##### Building stage #####
 FROM alpine:${ALPINE_VERSION} as builder
-LABEL version = "1.4"
+LABEL version = "1.5"
 LABEL maintainer = "JamiePhonic@gmail.com"
 
 # Versions of nginx, rtmp-module and ffmpeg 
-ARG  NGINX_VERSION=1.18.0
-ARG  NGINX_RTMP_MODULE_VERSION=1.2.1
-ARG  FFMPEG_VERSION=4.3.2
+ARG  NGINX_VERSION=1.21.3
+ARG  NGINX_RTMP_MODULE_VERSION=1.2.2
+ARG  FFMPEG_VERSION=4.4
 
 # Install dependencies
 RUN apk update	&& \

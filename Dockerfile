@@ -2,13 +2,13 @@ ARG DEBIAN_VERSION=stretch-slim
 
 ##### Building stage #####
 FROM debian:${DEBIAN_VERSION} as builder
-LABEL version = "1.4"
+LABEL version = "1.5"
 LABEL maintainer = "JamiePhonic@gmail.com"
 
 # Versions of nginx, rtmp-module and ffmpeg 
-ARG  NGINX_VERSION=1.18.0
-ARG  NGINX_RTMP_MODULE_VERSION=1.2.1
-ARG  FFMPEG_VERSION=4.3.2
+ARG  NGINX_VERSION=1.21.3
+ARG  NGINX_RTMP_MODULE_VERSION=1.2.2
+ARG  FFMPEG_VERSION=4.4
 
 # Install dependencies
 RUN apt-get update && \
@@ -19,7 +19,6 @@ RUN apt-get update && \
 		libvorbis-dev libvpx-dev libfreetype6-dev \
 		libmp3lame-dev libx264-dev libx265-dev && \
     rm -rf /var/lib/apt/lists/*
-	
 		
 # Download nginx source
 RUN mkdir -p /tmp/build && \
