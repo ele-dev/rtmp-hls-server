@@ -4,7 +4,7 @@
 
 ## Description
 
-This Docker image can be used to create a video streaming server that supports [**RTMP**](https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol) & **RTMPS**\* Ingest, **RTMP** & **RTMPS** (via Stunnel) Pushing, and **RTMP**, [**HLS**](https://en.wikipedia.org/wiki/HTTP_Live_Streaming) & [**DASH**](https://en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP) playback out of the box.
+This Docker image can be used to create a video streaming server that supports [**RTMP**](https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol) Ingest and **RTMP**, [**HLS**](https://en.wikipedia.org/wiki/HTTP_Live_Streaming) playback out of the box.
 It also allows adaptive streaming and custom transcoding of video streams.
 All modules are built from source on Debian and Alpine Linux base images.
 
@@ -16,10 +16,8 @@ All modules are built from source on Debian and Alpine Linux base images.
 - Default settings:
   - RTMP is ON
   - HLS is ON
-  - DASH is ON
   - Other Nginx configuration files are also provided to allow for RTMP-only streams or FFmpeg transcoding and adaptive streaming.
 - Statistic page of RTMP streams at `http://<server ip>:<server port>/stats`.
-- Available web video players (based on [video.js](https://videojs.com/) and [hls.js](https://github.com/video-dev/hls.js/)) at `/usr/local/nginx/html/players`.
 
 Current Image is built using:
 
@@ -34,7 +32,7 @@ This image was inspired by similar docker images from [tiangolo](https://hub.doc
 ### To run the server
 
 ```shell
-docker run -d -p 1935:1935 -p 1936:1936 -p 8080:8080 -e PUID=$UID -e PGID=0 -e SSL_DOMAIN='rtmp.domain.loc' -v /your/local/assets/:/assets jamiephonic/rtmps-hls-server:latest
+docker run -d -p 1935:1935 -p 8080:8080 -e PUID=$UID -e PGID=0 -v /your/local/assets/:/assets eledev/rtmp-hls-server:latest
 ```
 
 When you start the container, the default players and configuration files will be copied into `/your/local/assets/` to allow you to easily access and edit them.
