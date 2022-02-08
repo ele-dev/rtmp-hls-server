@@ -32,7 +32,7 @@ This image was inspired by similar docker images from [tiangolo](https://hub.doc
 ### To run the server
 
 ```shell
-docker run -d -p 1935:1935 -p 8080:8080 -e PUID=$UID -e PGID=0 -v /your/local/assets/:/assets eledev/rtmp-hls-server:latest
+docker run -d -p 1935:1935 -p 8080:8080 -e PUID=$UID -e PGID=0 eledev/stream-ingest:latest
 ```
 
 For more examples, see the [Wiki](https://github.com/JamiePhonic/rtmps-hls-server/wiki/usage)
@@ -75,4 +75,4 @@ Released under MIT license.
 
 - **GitHub repo**: <https://github.com/JamiePhonic/rtmp-hls-server.git>
 
-- **Docker Hub image**: <https://hub.docker.com/r/jamiephonic/rtmps-hls-server>
+- **Docker Hub image**: ---
