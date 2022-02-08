@@ -11,7 +11,7 @@ All modules are built from source on Debian and Alpine Linux base images.
 ## Features
 
 - The backend is [**Nginx**](http://nginx.org/en/) with [**nginx-rtmp-module**](https://github.com/arut/nginx-rtmp-module).
-- [**FFmpeg**](https://www.ffmpeg.org/) for transcoding and adaptive streaming
+- [**FFmpeg**](https://www.ffmpeg.org/) for live recording and transmuxing
 - Default settings:
   - RTMP is ON
   - HLS is ON
