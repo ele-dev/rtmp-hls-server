@@ -12,11 +12,9 @@ All modules are built from source on Debian and Alpine Linux base images.
 
 - The backend is [**Nginx**](http://nginx.org/en/) with [**nginx-rtmp-module**](https://github.com/arut/nginx-rtmp-module).
 - [**FFmpeg**](https://www.ffmpeg.org/) for transcoding and adaptive streaming
-- Stunnel for RTMPS support (primarily for Facebook Live)
 - Default settings:
   - RTMP is ON
   - HLS is ON
-  - Other Nginx configuration files are also provided to allow for RTMP-only streams or FFmpeg transcoding and adaptive streaming.
 - Statistic page of RTMP streams at `http://<server ip>:<server port>/stats`.
 
 Current Image is built using:
@@ -72,7 +70,5 @@ For more examples, see the [Wiki](https://github.com/JamiePhonic/rtmps-hls-serve
 Released under MIT license.
 
 ## More info
-
-- **GitHub repo**: <https://github.com/JamiePhonic/rtmp-hls-server.git>
 
 - **Docker Hub image**: https://hub.docker.com/repository/docker/eledev/stream-ingest
