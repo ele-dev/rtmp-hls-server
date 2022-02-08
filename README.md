@@ -35,9 +35,6 @@ This image was inspired by similar docker images from [tiangolo](https://hub.doc
 docker run -d -p 1935:1935 -p 8080:8080 -e PUID=$UID -e PGID=0 -v /your/local/assets/:/assets eledev/rtmp-hls-server:latest
 ```
 
-When you start the container, the default players and configuration files will be copied into `/your/local/assets/` to allow you to easily access and edit them.
-This will only be done once when you first start the container. If you want to restore the default configs, delete `/your/local/assets/.initialized` and restart the container.
-
 For more examples, see the [Wiki](https://github.com/JamiePhonic/rtmps-hls-server/wiki/usage)
 
 ***
@@ -54,9 +51,7 @@ For more examples, see the [Wiki](https://github.com/JamiePhonic/rtmps-hls-serve
   Go to Settings > Stream, choose the following settings:
   - Service: Custom Streaming Server.
   - Server: `rtmp://<server ip>:1935/live`.
-  - Stream key: anything you want, however provided video players assume stream key is `test`
-  
-See the [Wiki](https://github.com/JamiePhonic/rtmps-hls-server/wiki/streaming-to-the-server) for how to stream to the server with RTMPS
+  - StreamKey: anything (but test is the default)
 
 ***
 
@@ -68,22 +63,9 @@ See the [Wiki](https://github.com/JamiePhonic/rtmps-hls-server/wiki/streaming-to
   - Enter the streaming URL: `rtmp://<server ip>:1935/live/<stream-key>`
     Replace `<server ip>` with the IP of where the server is running, and
     `<stream-key>` with the stream key you used when setting up the stream.
-  - For HLS and DASH, the URLs are of the forms:
-    `http://<server ip>:8080/hls/<stream-key>.m3u8` and
-    `http://<server ip>:8080/dash/<stream-key>_src.mpd` respectively.
+  - For HLS the URLs are of the forms:
+    `http://<server ip>:8080/hls/<stream-key>.m3u8`
   - Click Play.
-
-- **Using provided web players:** <br/>
-  The provided demo players assume the stream-key is called `test` and the player is opened from localhost.
-  - To play RTMP content (requires Flash): `http://<server ip>:8080/players/rtmp.html`
-  - To play HLS content: `http://<server ip>:8080/players/hls_basic.html`
-  - To play HLS content using hls.js library: `http://<server ip>:8080/players/hls.html`
-  - To play DASH content: `http://<server ip>:8080/players/dash.html`
-
-  **Notes:**
-
-  - These web players are hardcoded to play stream key "test" at localhost.
-  - To change the stream source for these players, Modify the `src` attribute in the video tag in the html file and then reload the page.
 
 ## Copyright
 
