@@ -4,7 +4,7 @@
 
 ## Description
 
-This Docker image can be used to create a video streaming server that supports [**RTMP**](https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol) Ingest and **RTMP**, [**HLS**](https://en.wikipedia.org/wiki/HTTP_Live_Streaming) playback out of the box.
+This Docker image can be used to create a video streaming server that supports [**RTMP**](https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol) Ingest and [**HLS**](https://en.wikipedia.org/wiki/HTTP_Live_Streaming) playback out of the box.
 It also allows adaptive streaming and custom transcoding of video streams.
 All modules are built from source on Debian and Alpine Linux base images.
 
