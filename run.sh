@@ -20,18 +20,14 @@ if [ ! -f "/assets/.initialized" ]; then
     # Hard link the hls player as index.html (making it the default player)
     if [ "$IMAGE" = "Alpine" ]; then
         cp -Rfv /assets-default/* /assets/ 2>/dev/null
-        ln -f /assets/players/hls.html /assets/players/index.html
     else
         cp -Rfv /assets-default/* /assets/ 2>/dev/null
-        ln -f /assets/players/hls.html /assets/players/index.html
     fi
     # Create an empty file called '.initialized' so we dont re-copy the assets again
 	echo "Delete me and restart the container to restore default configs and players." >/assets/.initialized
 fi
 
 echo -e "`date +"%Y-%m-%d %H:%M:%S"` INFO: Creating symlinks to Configs and Players from /assets/ \\n"
-# Link players from assets directory
-ln -sf /assets/players /usr/local/nginx/html/
 # Link Nginx config from assets directory
 ln -sf /assets/configs/nginx.conf /etc/nginx/nginx.conf
 # Link Stunnel config from assets directory

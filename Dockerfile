@@ -112,9 +112,6 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
 # Copy  nginx config file to container
 COPY conf /assets-default/configs
 
-# Copy  html players to container
-COPY players /assets-default/players
-
 # Copy run script to container
 COPY run.sh /run.sh
 
@@ -126,5 +123,7 @@ EXPOSE 1935
 EXPOSE 1936
 EXPOSE 8080
 VOLUME /assets
+
+RUN chmod a+wr /mnt
 
 CMD ["bash", "/run.sh"]
