@@ -66,9 +66,6 @@ fi
 echo -e "`date +"%Y-%m-%d %H:%M:%S"` INFO: Setting Owner:Group on /assets/ to: $PUID:$PGID \\n"
 chown -R $PUID:$PGID /assets
 
-# Start Stunnel to handle outbound RTMPS streams (Facebook Live)
-echo -e "`date +"%Y-%m-%d %H:%M:%S"` INFO: Starting Stunnel..."
-stunnel4
 sleep 2
 # Start Nginx
 echo -e "`date +"%Y-%m-%d %H:%M:%S"` INFO: Starting Nginx!"
