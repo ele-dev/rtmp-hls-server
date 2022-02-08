@@ -30,8 +30,6 @@ fi
 echo -e "`date +"%Y-%m-%d %H:%M:%S"` INFO: Creating symlinks to Configs and Players from /assets/ \\n"
 # Link Nginx config from assets directory
 ln -sf /assets/configs/nginx.conf /etc/nginx/nginx.conf
-# Link Stunnel config from assets directory
-ln -sf /assets/configs/stunnel.conf /etc/stunnel/stunnel.conf
 
 # Verify the SSL directory exists. if not, create it
 if [ ! -d /assets/ssl/.self_signed ]; then
