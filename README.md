@@ -1,6 +1,6 @@
 # RTMP-HLS-Server Docker
 
-**Docker image for video streaming server that supports RTMP, RTMPS, HLS, and DASH streams.**
+**Docker image for video streaming server that supports RTMP and HLS and streams.**
 
 ## Description
 
