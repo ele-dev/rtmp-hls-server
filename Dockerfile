@@ -93,7 +93,7 @@ RUN apt-get update && \
 	apt-get install -y \
 		ca-certificates openssl libpcre3-dev \
 		librtmp1 libtheora0 libvorbis-dev libmp3lame0 \
-		libvpx4 libx264-dev libx265-dev stunnel4 htop && \
+		libvpx4 libx264-dev libx265-dev stunnel4 htop tzdata && \
     rm -rf /var/lib/apt/lists/* && \
 	mkdir /assets-default && mkdir /assets-default/ssl && \
 	mkdir /assets
@@ -114,6 +114,9 @@ COPY conf /assets-default/configs
 
 # Copy run script to container
 COPY run.sh /run.sh
+
+# Set correct timezone
+ENV TZ="Europe/Berlin"
 
 ENV IMAGE=Debian
 ENV PUID=0
