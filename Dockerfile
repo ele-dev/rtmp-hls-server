@@ -123,7 +123,7 @@ ENV PUID=0
 ENV PGID=0
 ENV SSL_DOMAIN=rtmp-server.loc
 EXPOSE 1935
-EXPOSE 8080
+EXPOSE 8082
 VOLUME /assets
 
 RUN chmod a+wr /mnt
