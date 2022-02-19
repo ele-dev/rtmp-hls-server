@@ -30,7 +30,7 @@ This image was inspired by similar docker images from [tiangolo](https://hub.doc
 ### To run the server
 
 ```shell
-docker run -d -p 1935:1935 -p 8080:8080 -e PUID=$UID -e PGID=0 eledev/stream-ingest:latest
+docker run -d -p 1935:1935 -p 8082:8082 -e PUID=$UID -e PGID=0 eledev/stream-ingest:latest
 ```
 
 For more examples, see the [Wiki](https://github.com/JamiePhonic/rtmps-hls-server/wiki/usage)
@@ -62,7 +62,7 @@ For more examples, see the [Wiki](https://github.com/JamiePhonic/rtmps-hls-serve
     Replace `<server ip>` with the IP of where the server is running, and
     `<stream-key>` with the stream key you used when setting up the stream.
   - For HLS the URLs are of the forms:
-    `http://<server ip>:8080/hls/<stream-key>.m3u8`
+    `http://<server ip>:8082/hls/<stream-key>.m3u8`
   - Click Play.
 
 ## Copyright
